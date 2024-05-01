@@ -1,12 +1,15 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'dist/output.css' %}">
   <title>Template</title>
 </head>
 <body>
-  <header class="bg-blue-900 flex items-center justify-between p-4 m-5">
+  <header class="bg-blue-800 flex items-center justify-between p-4 m-5">
     <div class="flex items-center m-5">
       <span class="text-black mr-4">Username</span>
       <button id="menu-button" class="text-black focus:outline-none">
