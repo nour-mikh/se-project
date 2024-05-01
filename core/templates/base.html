@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Template</title>
+</head>
+<body>
+  <header class="bg-blue-900 flex items-center justify-between p-4 m-5">
+    <div class="flex items-center m-5">
+      <span class="text-black mr-4">Username</span>
+      <button id="menu-button" class="text-black focus:outline-none">
+        <!-- Replace with your preferred burger menu icon -->
+        <svg class="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h7"></path></svg>
+      </button>
+    </div>
+  </header>
+  <nav id="menu" class="hidden bg-dark-blue">
+    {% for item in menu_items %}
+      <a href="{{ item.url }}" class="block py-2 px-4 hover:bg-gray-700">{{ item.name }}</a>
+    {% endfor %}
+  </nav>
+  <script>
+    const menuButton = document.getElementById('menu-button');
+    const menu = document.getElementById('menu');
+
+    menuButton.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>
