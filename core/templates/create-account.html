@@ -1,0 +1,51 @@
+
+{% extends 'base.html' %}  
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Create Account{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'dist/output.css' %}">
+</head>
+<body>
+        
+        {% block login_content %}
+        <a href="https://www.google.com" class="text-white block py-2 px-4 hover:bg-gray-700 rounded-lg">
+            Login
+        </a>
+
+    {% endblock %}
+
+    {% block content %}
+<div class="flex flex-row">
+    <div class="bg-cover bg-center h-1 w-1/2 bg-blue-800 text-white flex justify-center items-center">
+        <!-- add bg image here -->
+        <p class="items-center">HA YKOUN FI TITLE HON MAFROUD</p>
+    </div>
+    <div class="w-1/2 m-4 justify-center-center">
+        <h1 class="flex font-bold text-2xl items-start justify-center">Create Account</h1>
+        <h2>Username:</h2>
+        <input type="text" placeholder=" Username" class="bg-gray-300 rounded-lg m-4 w-full text-white">
+        <h2>Email:</h2>
+        <input type="text" placeholder=" Email" class="bg-gray-300 rounded-lg m-4 w-full text-white">
+        <h2>Gender:</h2>
+        <input type="text" placeholder=" Gender" class="bg-gray-300 rounded-lg m-4 w-full text-white">
+        <h2>Role:</h2>
+        <input type="text" placeholder=" Role" class="bg-gray-300 rounded-lg m-4 w-full text-white">
+        <h2>Password:</h2>
+        <input type="text" placeholder=" Password" class="bg-gray-300 rounded-lg m-4 w-full text-white">
+        <h2>Confirm Password:</h2>
+        <input type="text" placeholder=" Confirm Password" class="bg-gray-300 rounded-lg m-4 w-full text-white">
+
+        <div class="w-full flex flex-row justify-center">
+        <button class="bg-blue-800 rounded-lg px-3 py-1 text-white font-bold">  Create Account </button>
+        </div>  
+    </div>
+</div>
+{% endblock %}
+
+</body>
+</html>

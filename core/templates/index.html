@@ -1,13 +1,16 @@
+
+{% extends 'base.html' %}  
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index Page</title>
-    <link href="path/to/tailwind.css" rel="stylesheet">
+    <title>{% block title %}Index Page{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'dist/output.css' %}">
 </head>
 <body>
-    {% extends 'base.html' %}  
         
         {% block login_content %}
         <a href="https://www.google.com" class="text-white block py-2 px-4 hover:bg-gray-700 rounded-lg">
@@ -15,5 +18,25 @@
         </a>
 
     {% endblock %}
+
+    {% block content %}
+<div class="flex-row">
+    <div class="bg-cover bg-center bg-opacity-50 w-full ">
+        <!-- add bg image here bas ma 3refet kif -->
+        <p>image will be here <br> <br><br><br><br><br> <br><br><br><br><br><br></p>
+    </div>
+    <div class="w-full flex justify-center ">
+        {% for availability in availabilities %}
+            <div class="m-4">
+                <button class="bg-gray-500 text-black p-4 mb-4 rounded-lg">
+                <p>Date: {{ availability.date }}</p>
+                <p>Time: {{ availability.time }}</p>
+                <p>Status: {{ availability.status }}</p>
+                </button>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
 </body>
 </html>

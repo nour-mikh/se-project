@@ -1,0 +1,68 @@
+
+{% extends 'base.html' %}  
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Profile{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'dist/output.css' %}">
+</head>
+<body>
+        
+        {% block login_content %}
+        <a href="https://www.google.com" class="text-white block py-2 px-4 hover:bg-gray-700 rounded-lg">
+            Login
+        </a>
+
+    {% endblock %}
+
+    {% block content %}
+    <div class="flex flex-col items-center w-full h-1/2 px-4 py-2">
+        <!-- Profile Picture: probably nnayyem-->
+        <div class="relative">
+            <div class="bg-blue-900 bg-cover bg-center bg-opacity-50 w-24 h-24 rounded-full flex items-center justify-center mb-4">
+            </div>
+            <button class="absolute bottom-0 right-0 -mb-2 -mr-2 bg-white rounded-full p-1">
+                <svg class="h-6 w-6 text-blue-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                </svg>
+            </button>
+        </div>
+        <!-- Username: from db bi eznillah -->
+        <p class="text-white mb-4">Username</p>
+        <!-- Buttons: inshallah they will go somehwere -->
+        <div class="flex border-black">
+            <button class="bg-white text-blue-800 px-4 py-2 rounded-l-lg border border-black hover:bg-gray-600">My Info</button>
+            <button class="bg-white text-blue-800 px-4 py-2 border border-black hover:bg-gray-600">Bookings</button>
+            <button class="bg-white text-blue-800 px-4 py-2 rounded-r-lg border border-black hover:bg-gray-600">Statistics</button>
+        </div>
+
+       
+    </div>
+    <div class="border border-black h-1/2 flex flex-row justify-center items-center">
+
+    <div class="flex flex-col">
+        <h2>Username:</h2>
+        <input type="text" placeholder=" Username" class="bg-gray-300 rounded-lg m-4  text-white">
+        <h2>Email:</h2>
+        <input type="text" placeholder=" Email" class="bg-gray-300 rounded-lg m-4  text-white">
+        <h2>Gender:</h2>
+        <input type="text" placeholder=" Gender" class="bg-gray-300 rounded-lg m-4  text-white">
+    </div>
+    <div class="flex flex-col">
+        <h2>Role:</h2>
+        <input type="text" placeholder=" Role" class="bg-gray-300 rounded-lg m-4  text-white">
+        <h2>Password:</h2>
+        <input type="text" placeholder=" Password" class="bg-gray-300 rounded-lg m-4  text-white">
+        <button class="bg-blue-800 rounded-lg px-2 py-1 text-white font-bold">  Save </button>
+    </div>
+        
+    </div>
+    {% endblock %}
+    
+
+</body>
+</html>
