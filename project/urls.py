@@ -28,6 +28,8 @@ urlpatterns = [
     path('my-profile/',views.profile, name='my-profile'),
     path('bookings/',views.bookings, name='bookings'),
     path('statistics/',views.statistics, name='statistics'),
+    path('host/',views.host, name='host'),
+    path('feedback/',views.feedback, name='feedback'),
 ]
 
 if settings.DEBUG:

@@ -22,3 +22,9 @@ def bookings(request):
 
 def statistics(request):
     return render(request, 'statistics.html')
+
+def host(request):
+    return render(request,'host.html')
+
+def feedback(request):
+    return render(request,'feedback.html')

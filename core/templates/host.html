@@ -1,0 +1,49 @@
+
+
+{% extends 'base.html' %}  
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Host an Interview{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+</head>
+<body>
+        
+        {% block login_content %}
+        <a href="https://www.google.com" class="text-white block py-2 px-4 hover:bg-gray-700 rounded-lg">
+            Login
+        </a>
+
+    {% endblock %}
+
+    {% block content %}
+<div class="flex flex-row">
+    <div class="bg-cover bg-center h-1 w-1/2 bg-blue-800 text-white flex justify-center items-center">
+        <!-- add bg image here -->
+        <p class="items-center">My Interviews</p>
+    </div>
+    <div class="w-1/2 m-4 justify-center-center">
+        <h1 class="flex font-bold text-2xl items-start justify-center">Post An Interview</h1>
+        <h2>Category:</h2>
+        <input name ="category" type="text" placeholder=" Category" class="bg-gray-300 rounded-lg m-4 w-full text-white" required>
+        <h2>Date:</h2>
+        <input name="date" type="date" placeholder=" Date" class="bg-gray-300 rounded-lg m-4 w-full text-white" required>
+        <h2>Time:</h2>
+        <input name="time" type="time" placeholder=" Time" class="bg-gray-300 rounded-lg m-4 w-full text-white" required>
+        <h2>Price:</h2>
+        <input name="price" type="number" placeholder=" Price" class="bg-gray-300 rounded-lg m-4 w-full text-white" required>
+        
+
+        <div class="w-full flex flex-row justify-center">
+        <button class="bg-blue-800 rounded-lg px-3 py-1 text-white font-bold">  Host </button>
+        </div>  
+    </div>
+</div>
+{% endblock %}
+
+</body>
+</html>
