@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index Page</title>
+    <link href="path/to/tailwind.css" rel="stylesheet">
+</head>
+<body>
+    {% extends 'base.html' %}  
+        
+        {% block login_content %}
+        <a href="https://www.google.com" class="text-white block py-2 px-4 hover:bg-gray-700 ">
+            <button id="login-button " class="hover:bg-white rounded-lg">Login</button>
+        </a>
+
+    {% endblock %}
+</body>
+</html>
