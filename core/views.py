@@ -16,3 +16,9 @@ def create(request):
 
 def profile(request):
     return render(request, 'my-profile.html')
+
+def bookings(request):
+    return render(request, 'bookings.html')
+
+def statistics(request):
+    return render(request, 'statistics.html')
