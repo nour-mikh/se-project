@@ -853,6 +853,10 @@ video {
   padding: 1.5rem;
 }
 
+.p-8 {
+  padding: 2rem;
+}
+
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -871,6 +875,11 @@ video {
 .px-6 {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+}
+
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .py-1 {
@@ -944,6 +953,18 @@ video {
   outline-style: solid;
 }
 
+.filter {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.transition {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
 .welcome-container {
   width: 100%;
   height: 25%;
@@ -975,11 +996,11 @@ video {
   }
 }
 
-.p-6 {
+.p-8 {
   padding: 2rem;
 }
 
-.px-6 {
+.px-8 {
   padding-left: 2.5rem;
   padding-right: 2.5rem;
 }
@@ -991,6 +1012,45 @@ video {
 .hover\:bg-white:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.account-menu-content {
+  position: absolute;
+  top: 95px;
+  right: -22%;
+  border: solid black 1px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  flex-direction: column;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  color: black;
+  border-radius: 10px;
+  transition: 0.3s;
+  z-index: 1000;
+}
+
+.account-menu-content.active {
+  right: 2%;
+}
+
+.signIn-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  padding: 2%;
+  margin-bottom: 3%;
 }
 
 .hover\:bg-gray-600:hover {

@@ -1,39 +1,53 @@
-{% extends 'base.html' %}  
 {% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Index Page{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/output.css' %}">
-</head>
-<body>
-        
-        {% block login_content %}
-        <a href="https://www.google.com" class="text-white block py-2 px-4 hover:bg-gray-700 rounded-lg">
-            Login
-        </a>
-
-    {% endblock %}
-
-    {% block content %}
-<div class="flex-row">
-    <div class="welcome-container">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index Page</title>
+    <link rel="stylesheet" href="{% static 'dist/output.css' %}" />
+  </head>
+  <body class="flex flex-col h-screen w-full" style="overflow-x: hidden;">
+    <div class="bg-blue-800 flex flex-row justify-end items-center w-full px-4 py-4 text-white font-bold">
+      <button id="login-button" class="hover:bg-white rounded-lg hover:text-blue-900 px-4 py-2"> Login </button>
+      <div class="account-menu-content" id="account-menu-loggedIn">
+        <h1 class="font-bold text-blue-900 text-3xl p-8 ">LOGIN</h1>
+        <form method="post" class="signIn-form" id="signIn-form">
+          <input name="email" type="text" placeholder=" Email" class="bg-gray-300 rounded-lg mb-4 w-full text-white">
+          <input name="password" type="text" placeholder=" Password" class="bg-gray-300 rounded-lg mb-4 w-full text-white">
+          <button type="submit" class="bg-blue-800 rounded-lg px-4 py-2 m-1 text-white font-bold hover:bg-white hover:text-blue" style="border: solid rgb(30 64 175) 2px"> Log In </button>
+        </form>
+        <a href="/create-account" class="text-blue-900 font-bold text-lg py-4">Don't Have An Account?</a>
+      </div>
     </div>
-    <div class="w-full flex justify-center ">
+
+    <div class="welcome-container"></div>
+    
+    <div class="w-full flex justify-center" >
         {% for availability in availabilities %}
-            <div class="m-4">
-                <button class="bg-gray-500 text-black p-4 mb-4 rounded-lg">
-                <p>Date: {{ availability.date }}</p>
-                <p>Time: {{ availability.time }}</p>
-                <p>Status: {{ availability.status }}</p>
-                </button>
-            </div>
+          <div class="bg-gray-300 text-black p-8 px-8 m-4 mr-2 rounded-lg flex flex-col items-center ">
+            <h1 class="font-bold">Category:</h1>
+            <p>{{ availability.category }}</p>
+            <h1 class="font-bold">Date: </h1>
+            <p>{{ availability.date }}</p>
+            <h1 class="font-bold">Time: </h1>
+            <p> {{ availability.time }}</p>
+            <h1 class="font-bold">Price: </h1>
+            <p> {{ availability.price }}</p>
+          </div>
         {% endfor %}
     </div>
-</div>
-{% endblock %}
-</body>
+  <script>
+    let loginButton = document.getElementById("login-button");
+    let loggedInMenu = document.getElementById("account-menu-loggedIn");
+
+    loginButton.onclick = () => {
+        loggedInMenu.classList.toggle("active");
+      };
+  </script>
+
+  </body>
+
+
 </html>
