@@ -9,15 +9,24 @@
   <title>{% block title %}Template{% endblock %}</title>
 </head>
 <body>
-  <header class="bg-blue-800 flex items-center p-4 m-0">
-    <div class="flex items-center m-5 ">
+  <header class="bg-blue-800 flex p-4 m-0">
+    <div class="flex items-center ml-0 ">
         <button id="menu-button" class="text-white focus:outline-none">
-          <!-- Replace with your preferred burger menu icon -->
-          <svg class="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <!-- <svg class="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
+        </svg> -->
         </button>
       </div>
+
+      <div class=" bg-blue-800 flex justify-between h-full mr-0">
+        <nav id="menu" class=" bg-dark-blue flex flex-row items-center">
+          <a href="{% url 'feedback' %}" class="  block py-2 px-4 text-white hover:bg-blue-400 rounded-lg">Leave a Review</a>
+          <a href="{% url 'host' %}"class="block py-2 px-4 text-white hover:bg-blue-400 rounded-lg">Host an Interview</a>
+          <a href="{% url 'my-profile' %}" class="block py-2 px-4 text-white hover:bg-blue-400 rounded-lg">My Profile</a>
+          <a href="{% url 'index' %}"class="block py-2 px-4 text-white hover:bg-blue-400 rounded-lg">Logout</a>
+        </nav>
+      </div>
+
     <div class="ml-auto">
       {% block login_content %}
       <a id="login-button"> 
@@ -25,16 +34,10 @@
       </a>
       {% endblock %}
     </div>
-  </header>
-<div class=" bg-blue-800 flex justify-center place-content-end border-spacing-6 h-full">
-  <nav id="menu" class="hidden bg-dark-blue flex flex-row items-center">
-    <a href="{% url 'feedback' %}" class="  block py-2 px-4 hover:bg-white md:w-1/2 rounded-lg">Leave a Review</a>
-    <a href="{% url 'host' %}"class="block py-2 px-4 hover:bg-white md:w-1/2 rounded-lg">Host an Interview</a>
-    <a href="{% url 'my-profile' %}" class="block py-2 px-4 hover:bg-white rounded-lg">My Profile</a>
-    <a href="{% url 'index' %}"class="block py-2 px-4 hover:bg-white rounded-lg">Logout</a>
-  </nav>
-</div>
-  <script>
+  
+
+</header>
+  <!-- <script>
     const menuButton = document.getElementById('menu-button');
     const menu = document.getElementById('menu');
 
@@ -45,7 +48,7 @@
     menu.addEventListener('mouseleave', () => {
       menu.classList.add('hidden');
     });
-  </script>
+  </script> -->
    {% block top_content %}{% endblock %}
     
    <main>
