@@ -30,6 +30,7 @@ urlpatterns = [
     path('statistics/',views.statistics, name='statistics'),
     path('host/',views.host, name='host'),
     path('feedback/',views.feedback, name='feedback'),
+    path('home/',views.home, name='home'),
 ]
 
 if settings.DEBUG:

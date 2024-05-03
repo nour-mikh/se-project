@@ -4,9 +4,10 @@ def main(request):
     availabilities = []  # Define the list before the loop
     for i in range(4):
         availability = {
+            'category': f'test_{i}',
             'date': f'test_{i}',
             'time': f'test_{i}',
-            'status': f'test_{i}'
+            'price': f'test_{i}'
         }
         availabilities.append(availability)
     return render(request, 'index.html', {'availabilities': availabilities})
@@ -28,3 +29,6 @@ def host(request):
 
 def feedback(request):
     return render(request,'feedback.html')
+
+def home(request):
+    return render(request,'home.html')
