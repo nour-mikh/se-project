@@ -12,15 +12,17 @@
 <body class="h-screen">
     {% block content %}
 <div class="flex flex-row h-full justify-center">
+    <form class="w-full flex flex-row justify-center" method="post" action="{% url 'feedback_form' %}">
+    {% csrf_token %}
     <div class="bg-cover bg-center w-1/2 px-4 bg-blue-800 text-white flex flex-col justify-center">
         <h2 class="text-2xl">Booking ID</h2>
-        <input name ="bookingID" type="text" placeholder=" Booking ID" class="bg-gray-300 rounded-lg mb-4 w-full text-white text-lg" required>
+        <input name ="booking_id" type="text" placeholder=" Booking ID" class="bg-gray-300 rounded-lg mb-4 w-full text-white text-lg" required>
         <h2 class="text-2xl">Communication Skills</h2>
-        <input name="comSkills" type="number" placeholder=" Communication Skills" class="bg-gray-300 rounded-lg mb-4 w-full text-white text-lg" required>
+        <input name="com_skills" type="number" placeholder=" Communication Skills" class="bg-gray-300 rounded-lg mb-4 w-full text-white text-lg" required>
         <h2 class="text-2xl">Professionalism</h2>
         <input name="professionalism" type="number" placeholder=" Professionalism" class="bg-gray-300 rounded-lg mb-4 w-full text-white text-lg" required>
         <h2 class="text-2xl">Adaptibility</h2>
-        <input name="adaptibility" type="number" placeholder=" Adaptibility" class="bg-gray-300 rounded-lg mb-4 w-full text-white text-lg" required>
+        <input name="adaptability" type="number" placeholder=" Adaptibility" class="bg-gray-300 rounded-lg mb-4 w-full text-white text-lg" required>
     </div>
     
     <div class="flex flex-col w-1/2 m-4 justify-center">
@@ -30,7 +32,7 @@
         <h2 class="text-2xl">Competency</h2>
         <input name="competency" type="number" placeholder=" Competency" class="bg-gray-300 rounded-lg mb-4 w-full text-white text-lg" required>
         <h2 class="text-2xl">Time Management</h2>
-        <input name="time management" type="number" placeholder=" Time Management" class="bg-gray-300 rounded-lg mb-4 w-full text-white text-lg" required>
+        <input name="time_mgt" type="number" placeholder=" Time Management" class="bg-gray-300 rounded-lg mb-4 w-full text-white text-lg" required>
         <h2 class="text-2xl">Overall Effectiveness</h2>
         <input name="effectiveness" type="number" placeholder=" Effectiveness" class="bg-gray-300 rounded-lg mb-4 w-full text-white text-lg" required>
         
@@ -39,6 +41,8 @@
         <button class="bg-blue-800 rounded-lg px-3 py-1 text-white font-bold text-2xl hover:bg-white hover:text-blue" style="border: solid rgb(30 64 175) 2px">  Submit </button>
         </div>  
     </div>
+    </form>
+
 </div>
 {% endblock %}
 </body>

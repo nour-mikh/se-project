@@ -13,7 +13,8 @@
       <button id="login-button" class="hover:bg-white rounded-lg hover:text-blue-900 px-4 py-2"> Login </button>
       <div class="account-menu-content" id="account-menu-loggedIn">
         <h1 class="font-bold text-blue-900 text-3xl p-8 ">LOGIN</h1>
-        <form method="post" class="signIn-form" id="signIn-form">
+        <form method="post" class="signIn-form" id="signIn-form" action="{% url 'login_form' %}">
+          {% csrf_token %}
           <input name="email" type="text" placeholder=" Email" class="bg-gray-300 rounded-lg mb-4 w-full text-white">
           <input name="password" type="text" placeholder=" Password" class="bg-gray-300 rounded-lg mb-4 w-full text-white">
           <button type="submit" class="bg-blue-800 rounded-lg px-4 py-2 m-1 text-white font-bold hover:bg-white hover:text-blue" style="border: solid rgb(30 64 175) 2px"> Log In </button>
@@ -38,13 +39,14 @@
           </div>
         {% endfor %}
     </div>
+
   <script>
     let loginButton = document.getElementById("login-button");
     let loggedInMenu = document.getElementById("account-menu-loggedIn");
 
     loginButton.onclick = () => {
-        loggedInMenu.classList.toggle("active");
-      };
+      loggedInMenu.classList.toggle("active");
+    };
   </script>
 
   </body>

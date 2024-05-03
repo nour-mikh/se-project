@@ -17,24 +17,23 @@
         </a>
         <h1 class="flex font-bold items-start justify-center text-3xl mb-4 py-2">Create Your Account</h1>
     </div>
-    <div class="flex flex-col w-1/2 px-4 m-4 justify-center">
+    <form class="flex flex-col w-1/2 px-4 m-4 justify-center" method="POST" action="{% url 'create_account_form' %}">
+        {% csrf_token %}
         <h2 class="text-2xl">Username</h2>
-        <input  type="text" placeholder=" Username" class="bg-gray-300 rounded-lg mb-4 w-full text-white text-lg">
+        <input  name="username" type="text" placeholder=" Username" class="bg-gray-300 rounded-lg mb-4 w-full text-white text-lg">
         <h2 class="text-2xl">Email</h2>
-        <input type="text" placeholder=" Email" class="bg-gray-300 rounded-lg mb-4 w-full text-white text-lg">
+        <input name="email" type="text" placeholder=" Email" class="bg-gray-300 rounded-lg mb-4 w-full text-white text-lg">
         <h2 class="text-2xl">Gender</h2>
-        <input type="text" placeholder=" Gender" class="bg-gray-300 rounded-lg mb-4 w-full text-white text-lg">
-        <h2 class="text-2xl">Role</h2>
-        <input type="text" placeholder=" Role" class="bg-gray-300 rounded-lg mb-4 w-full text-white text-lg">
+        <input name="gender" type="text" placeholder=" Gender" class="bg-gray-300 rounded-lg mb-4 w-full text-white text-lg">
         <h2 class="text-2xl">Password</h2>
-        <input type="text" placeholder=" Password" class="bg-gray-300 rounded-lg mb-4 w-full text-white text-lg">
+        <input name="password" type="text" placeholder=" Password" class="bg-gray-300 rounded-lg mb-4 w-full text-white text-lg">
         <h2 class="text-2xl" >Confirm Password</h2>
         <input type="text" placeholder=" Confirm Password" class="bg-gray-300 rounded-lg mb-4 w-full text-white text-lg">
 
         <div class="w-full flex flex-row justify-center">
         <button class="bg-blue-800 rounded-lg px-4 py-2 m-4 text-white font-bold text-2xl hover:bg-white hover:text-blue" style="border: solid rgb(30 64 175) 2px"> Create Account </button>
         </div>  
-    </div>
+    </form>
 </div>
 
 </body>

@@ -41,6 +41,11 @@
   padding-right: 2.5rem;
 }
 
+.py-8 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
 .mr-2{
     margin-right: 2rem;
 }
