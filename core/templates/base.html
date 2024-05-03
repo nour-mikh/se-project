@@ -28,10 +28,10 @@
   </header>
 <div class=" bg-blue-800 flex justify-center place-content-end border-spacing-6 h-full">
   <nav id="menu" class="hidden bg-dark-blue flex flex-row items-center">
-    <a href="#" class="  block py-2 px-4 hover:bg-white md:w-1/2 rounded-lg">Leave a Review</a>
-    <a href="#" class="block py-2 px-4 hover:bg-white md:w-1/2 rounded-lg">Host an Interview</a>
+    <a href="{% url 'feedback' %}" class="  block py-2 px-4 hover:bg-white md:w-1/2 rounded-lg">Leave a Review</a>
+    <a href="{% url 'host' %}"class="block py-2 px-4 hover:bg-white md:w-1/2 rounded-lg">Host an Interview</a>
     <a href="{% url 'my-profile' %}" class="block py-2 px-4 hover:bg-white rounded-lg">My Profile</a>
-    <a href="#" class="block py-2 px-4 hover:bg-white rounded-lg">Logout</a>
+    <a href="{% url 'index' %}"class="block py-2 px-4 hover:bg-white rounded-lg">Logout</a>
   </nav>
 </div>
   <script>
