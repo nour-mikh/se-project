@@ -5,28 +5,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}My Profile{% endblock %}</title>
+    <title>My Profile</title>
     <link rel="stylesheet" href="{% static 'dist/output.css' %}" />
   </head>
-  <body>
-    {% block login_content %}
-    <a
-      href="https://www.google.com"
-      class="text-white block py-2 px-4 hover:bg-gray-700 rounded-lg"
-    >
-      Login
-    </a>
+  <body class="h-full">
+  {% block content %}
 
-    {% endblock %} {% block content %}
-    <div class="flex flex-col items-center w-full h-1/2 px-4 py-2">
+    <div class="flex flex-col items-center w-full px-4 py-2">
       <!-- Profile Picture: probably nnayyem-->
       <div class="relative">
-        <div
-          class="bg-blue-900 bg-cover bg-center bg-opacity-50 w-24 h-24 rounded-full flex items-center justify-center mb-4"
-        ></div>
-        <button
-          class="absolute bottom-0 right-0 -mb-2 -mr-2 bg-white rounded-full p-1"
-        >
+        <div class="bg-blue-900 bg-cover bg-center bg-opacity-50 w-24 h-24 rounded-full flex items-center justify-center mb-4"></div>
+        <button class="absolute bottom-0 right-0 -mb-2 -mr-2 bg-white rounded-full p-1">
           <svg
             class="h-6 w-6 text-blue-900"
             fill="none"
@@ -42,69 +31,82 @@
           </svg>
         </button>
       </div>
-      <!-- Username: from db bi eznillah -->
-      <p class="text-white mb-4">Username</p>
-      <!-- Buttons: inshallah they will go somehwere -->
+      <p class="text-blue-900 font-bold mb-4">username</p>
+
       <div class="flex border-black">
-        <a
-          href="{% url 'my-profile' %}"
-          class="bg-white text-blue-800 px-4 py-2 rounded-l-lg border border-black hover:bg-gray-600"
-          >My Info</a
-        >
-        <a
-          href="{% url 'bookings' %}"
-          class="bg-white text-blue-800 px-4 py-2 border border-black hover:bg-gray-600"
-          >Bookings</a
-        >
-        <a
-          href="{% url 'statistics' %}"
-          class="bg-white text-blue-800 px-4 py-2 rounded-r-lg border border-black hover:bg-gray-600"
-          >Statistics</a
-        >
+        <button class="bg-white text-blue-800 font-bold px-4 py-2  rounded-l-lg border border-black hover:bg-gray-300 tabs" onclick="openTab(event,'info_tab')">My Info</button>
+        <button class="bg-white text-blue-800 font-bold px-4 py-2 border border-black hover:bg-gray-300 tabs" onclick="openTab(event,'booking_tab')">Bookings</button>
+        <button class="bg-white text-blue-800 font-bold px-4 py-2 rounded-r-lg border border-black hover:bg-gray-300 tabs" onclick="openTab(event,'stats_tab')">Statistics</button>
       </div>
+
     </div>
-    <div
-      class="border border-black h-1/2 flex flex-row justify-center items-center"
-    >
-      {% block box_content %}
-      <div class="flex flex-col w-1/2 justify-center items-center">
-        <h2>Username:</h2>
-        <input
-          type="text"
-          placeholder=" Username"
-          class="bg-gray-300 rounded-lg m-4 text-white"
-        />
-        <h2>Email:</h2>
-        <input
-          type="text"
-          placeholder=" Email"
-          class="bg-gray-300 rounded-lg m-4 text-white"
-        />
-        <h2>Gender:</h2>
-        <input
-          type="text"
-          placeholder=" Gender"
-          class="bg-gray-300 rounded-lg m-4 text-white"
-        />
-      </div>
-      <div class="flex flex-col justify-center items-center w-1/2">
-        <h2>Role:</h2>
-        <input
-          type="text"
-          placeholder=" Role"
-          class="bg-gray-300 rounded-lg m-4 text-white"
-        />
-        <h2>Password:</h2>
-        <input
-          type="text"
-          placeholder=" Password"
-          class="bg-gray-300 rounded-lg m-4 text-white"
-        />
-        <button class="bg-blue-800 rounded-lg px-2 py-1 text-white font-bold">
-          Save
+
+    <div class="border-t-2 w-full p-6 mt-4 flex flex-row">
+      <div class="tabcontent w-full flex flex-col justify-center items-center" id="info_tab">
+        <div class="flex flex-row w-full justify-center">
+          <div class="flex flex-col justify-start items-center p-8">
+              <h2>Username</h2>
+              <input type="text" placeholder=" Username" class="bg-gray-300 rounded-lg m-4 text-white"/>
+              <h2>Email</h2>
+              <input type="text" placeholder=" Email" class="bg-gray-300 rounded-lg m-4 text-white"/>
+          </div>
+
+          <div class="flex flex-col justify-start items-center p-8">
+              <h2>Gender</h2>
+              <input type="text" placeholder=" Gender" class="bg-gray-300 rounded-lg m-4 text-white"/>
+              <h2>Password:</h2>
+              <input type="text" placeholder=" Password" class="bg-gray-300 rounded-lg m-4 text-white"/>
+
+              
+          </div>
+        </div>
+        <button class="bg-blue-800 rounded-lg p-4 text-white font-bold w-20 hover:text-blue-900 hover:bg-white" style="border: solid rgb(30, 58, 138) 2px">
+            Save
         </button>
       </div>
+
+      <div class="tabcontent w-full flex flex-col justify-center items-center" id="booking_tab">
+        <h1>Bookings</h1>
+      </div>
+      <div class="tabcontent w-full flex flex-col justify-center items-center" id="stats_tab">
+        <h1>Stats</h1>
+      </div>
     </div>
-    {% endblock %} {% endblock %}
+
+    <script>
+        let infoTab = document.getElementById("info_tab");
+        let bookingTab = document.getElementById("booking_tab");
+        let statsTab = document.getElementById("stats_tab");
+
+        window.onload = () =>{
+          document.getElementById("info_tab").style.display="flex";
+          let tabs = document.getElementsByClassName("tabs");
+          tabs[0].className += " active";
+        }
+
+        function openTab(event,tabname){
+            console.log(tabname);
+
+            var i,tabcontent,tabs;
+            tabcontent = document.getElementsByClassName('tabcontent');
+            console.log(tabcontent);
+
+            for(i=0;i<tabcontent.length;i++){
+                tabcontent[i].style.display="none";
+            }
+
+            tabs = document.getElementsByClassName('tabs');
+            console.log(tabs);
+            
+            for(i=0;i<tabs.length;i++){
+                tabs[i].className=tabs[i].className.replace(" active","");
+            }
+            console.log(document.getElementById(tabname));
+            document.getElementById(tabname).style.display="flex";
+            event.currentTarget.className += " active";
+        }
+    </script>
+
+    {% endblock %}
   </body>
 </html>

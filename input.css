@@ -91,3 +91,14 @@
   padding: 2%;
   margin-bottom: 3%;
 }
+
+
+/*my profile page styling*/
+
+.tabcontent{
+    display:none;
+}
+
+.tabs.active{
+    background-color: rgb(209 213 219);
+}
