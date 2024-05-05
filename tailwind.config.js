@@ -26,10 +26,9 @@ module.exports = {
     },
     extend: {
       colors: {
-        customDarkGreen: "#006e58",
-        customLightGreen: "#8FB9B2",
+        customMain: '#1E40AF',
       },
-    },
+    }
   },
   plugins: [],
 };

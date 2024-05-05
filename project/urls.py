@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.main,name='index'),
     path('create-account/', views.create, name='create-account'),
+    path('save_user', views.save_user, name='save_user'),
     path('my-profile/',views.profile, name='my-profile'),
     path('bookings/',views.bookings, name='bookings'),
     path('statistics/',views.statistics, name='statistics'),

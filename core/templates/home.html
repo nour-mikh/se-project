@@ -13,22 +13,30 @@
 <body class="h-screen">
         
     {% block content %}
-<div class="flex flex-col h-full justify-center">
+<div class="flex flex-col justify-center">
     <h1 class="flex font-bold items-start justify-center text-3xl m-5 py-8">Available Interviews</h1>
     
     <div class="w-full flex justify-center" >
-        {% for availability in availabilities %}
-          <div class="bg-gray-300 text-black p-8 px-8 m-4 mr-2 rounded-lg flex flex-col items-center ">
-            <h1 class="font-bold">Category:</h1>
-            <p>{{ availability.category }}</p>
-            <h1 class="font-bold">Date: </h1>
-            <p>{{ availability.date }}</p>
-            <h1 class="font-bold">Time: </h1>
-            <p> {{ availability.time }}</p>
-            <h1 class="font-bold">Price: </h1>
-            <p> {{ availability.price }}</p>
-          </div>
-        {% endfor %}
+
+        <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-8 w-full px-5">
+          {% for availability in availabilities %}
+              <div class="border p-4 rounded-lg mb-4 bg-slate-100 w-full">
+                  <ul class="max-w-full">
+                    <h1 class="font-bold">Category:</h1>
+                    <p>{{ availability.category }}</p>
+                    <h1 class="font-bold">Date: </h1>
+                    <p>{{ availability.date }}</p>
+                    <h1 class="font-bold">Time: </h1>
+                    <p> {{ availability.time }}</p>
+                    <h1 class="font-bold">Price: </h1>
+                    <p> {{ availability.price }}</p>
+                  </ul>
+
+                  <div class="border-t">
+                  </div>
+              </div>
+          {% endfor %}
+      </div>
     </div>
 
     <div>
