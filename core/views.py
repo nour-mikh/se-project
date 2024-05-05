@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from .models import UserProfile
 
 def main(request):
     availabilities = []  # Define the list before the loop
@@ -13,6 +15,39 @@ def main(request):
     return render(request, 'index.html', {'availabilities': availabilities})
 
 def create(request):
+    print("alo alo 1")
+    if request.method == 'POST':
+        print("alo alo")
+        # Get data from the form
+        username = request.POST.get('username')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        password = request.POST.get('password1')  # Assuming both passwords are the same
+        gender = request.POST.get('gender')
+        mobile_number = request.POST.get('mobile_number')
+        date_of_birth = request.POST.get('date_of_birth')
+        image = request.FILES.get('image')
+
+        # Create a new User object
+        user = User.objects.create_user(username=username, email=email, password=password)
+        user.first_name = first_name
+        user.last_name = last_name
+        user.save()
+
+        # Create a new UserProfile object
+        user_profile = UserProfile.objects.create(
+            user=user,
+            mobile_number=mobile_number,
+            gender=gender,
+            date_of_birth=date_of_birth,
+            # If you want to include image, uncomment the line below
+            # image=image
+        )
+
+        print('User and UserProfile created successfully!')
+        # Redirect to a success page or login page
+        return redirect('home.html')
     return render(request, 'create-account.html')
 
 def profile(request):
@@ -64,13 +99,6 @@ def feedback_form(request):
         effectiveness = request.POST.get("effectiveness")
     return render(request,'home.html')
 
-def create_account_form(request):
-    if request.method == 'POST':
-        username = request.POST.get("username")
-        email = request.POST.get("email")
-        gender = request.POST.get("gender")
-        password = request.POST.get("password")
-    return render(request,'home.html')
 
 def login_form(request):
     if request.method == 'POST':

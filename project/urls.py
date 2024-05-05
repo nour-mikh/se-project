@@ -25,7 +25,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.main,name='index'),
     path('create-account/', views.create, name='create-account'),
-    path('save_user', views.save_user, name='save_user'),
     path('my-profile/',views.profile, name='my-profile'),
     path('bookings/',views.bookings, name='bookings'),
     path('statistics/',views.statistics, name='statistics'),
@@ -34,7 +33,7 @@ urlpatterns = [
     path('home/',views.home, name='home'),
     path('host_interview_form/',views.host_interview_form, name='host_interview_form'),
     path('feedback_form/',views.feedback_form,name="feedback_form"),
-    path('create_account_form/',views.create_account_form,name="create_account_form"),
+    #path('create_account_form/',views.create_account_form,name="create_account_form"),
     path('login_form/',views.login_form,name="login_form"),
 ]
 

@@ -12,6 +12,7 @@ class UserProfile(models.Model):
         ('Prefer not to say', 'Prefer not to say'),
     )
     gender = models.CharField(max_length=200, choices=GENDER_CHOICES, blank=True)
+    date_of_birth = models.DateField(blank=True, null=True)
 
 
 class InterviewCategory(models.Model):
