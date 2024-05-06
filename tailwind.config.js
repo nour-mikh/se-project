@@ -26,7 +26,8 @@ module.exports = {
     },
     extend: {
       colors: {
-        customMain: '#1E40AF',
+        customMain: '#161b33',
+        customSec: '#a69cac'
       },
     }
   },

@@ -34,7 +34,7 @@ urlpatterns = [
     path('host_interview_form/',views.host_interview_form, name='host_interview_form'),
     path('feedback_form/',views.feedback_form,name="feedback_form"),
     #path('create_account_form/',views.create_account_form,name="create_account_form"),
-    path('login_form/',views.login_form,name="login_form"),
+    path('logout/',views.logout,name="logout"),
 ]
 
 if settings.DEBUG:

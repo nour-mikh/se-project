@@ -1,8 +1,25 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 from .models import UserProfile
+from django.contrib import messages
 
 def main(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        # Authenticate the user
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            print("login successfull")
+            login(request, user)
+            return render(request, 'home.html')  
+        else:
+            print("failed to login: ", request)
+            messages.error(request, 'Invalid username or password')
+    
     availabilities = []  # Define the list before the loop
     for i in range(4):
         availability = {
@@ -46,8 +63,7 @@ def create(request):
         )
 
         print('User and UserProfile created successfully!')
-        # Redirect to a success page or login page
-        return redirect('home.html')
+        return render(request, 'home.html')
     return render(request, 'create-account.html')
 
 def profile(request):
@@ -100,8 +116,5 @@ def feedback_form(request):
     return render(request,'home.html')
 
 
-def login_form(request):
-    if request.method == 'POST':
-        email = request.POST.get("email")
-        password = request.POST.get("password")
-    return render(request,'home.html')
+def logout(request):
+    return(request, 'home.html')
