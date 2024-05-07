@@ -8,7 +8,7 @@
     <title>Index Page</title>
     <link rel="stylesheet" href="{% static 'dist/output.css' %}" />
   </head>
-  <body class="flex flex-col h-screen w-full" style="overflow-x: hidden;">
+  <body class="flex flex-col h-screen w-screen overflow-hidden" >
     <div class="bg-customMain flex flex-row justify-end items-center w-full px-4 py-4 text-white font-bold">
       <button id="login-button" class="hover:bg-white rounded-lg hover:text-customMain px-4 py-2"> Login </button>
       <div class="account-menu-content" id="account-menu-loggedIn">
@@ -29,24 +29,29 @@
           </p>
       </form>
       </div>
+
+
     </div>
 
-    <div class="welcome-container"></div>
+    <section id="homeSection" class="grid grid-cols-2 gap-4 items-center justify-center">
+			<div class="flex flex-col justify-start h-screen bg-customSec">
+				<h1 class="text-7xl font-extrabold h-64 max-w-2xl mt-32 ml-16">
+					interview_me, your interview platform for 
+					<a href="" class="typewrite" data-period="2000" data-type='["practicing interviewing", "coding with experts", "conquering your fears", "improving your skills" ]'>
+					  <span class="wrap text-white"></span>
+					</a>
+				</h1>
+			</div>
+
+			<div class="flex flex-col items-center -mt-28">
+        <img src="{% static 'images/robot.webp' %}" alt="robot">
+
+			</div>
+
+
+		</section>
     
-    <div class="w-full flex justify-center" >
-        {% for availability in availabilities %}
-          <div class="bg-gray-300 text-black p-8 px-8 m-4 mr-2 rounded-lg flex flex-col items-center ">
-            <h1 class="font-bold">Category:</h1>
-            <p>{{ availability.category }}</p>
-            <h1 class="font-bold">Date: </h1>
-            <p>{{ availability.date }}</p>
-            <h1 class="font-bold">Time: </h1>
-            <p> {{ availability.time }}</p>
-            <h1 class="font-bold">Price: </h1>
-            <p> {{ availability.price }}</p>
-          </div>
-        {% endfor %}
-    </div>
+
 
   <script>
     let loginButton = document.getElementById("login-button");
@@ -55,6 +60,65 @@
     loginButton.onclick = () => {
       loggedInMenu.classList.toggle("active");
     };
+
+
+
+    var TxtType = function(el, toRotate, period) {
+			this.toRotate = toRotate;
+			this.el = el;
+			this.loopNum = 0;
+			this.period = parseInt(period, 10) || 2000;
+			this.txt = '';
+			this.tick();
+			this.isDeleting = false;
+		};
+	
+		TxtType.prototype.tick = function() {
+			var i = this.loopNum % this.toRotate.length;
+			var fullTxt = this.toRotate[i];
+	
+			if (this.isDeleting) {
+			this.txt = fullTxt.substring(0, this.txt.length - 1);
+			} else {
+			this.txt = fullTxt.substring(0, this.txt.length + 1);
+			}
+	
+			this.el.innerHTML = '<span class="wrap text-white">'+this.txt+'</span>';
+	
+			var that = this;
+			var delta = 200 - Math.random() * 100;
+	
+			if (this.isDeleting) { delta /= 2; }
+	
+			if (!this.isDeleting && this.txt === fullTxt) {
+			delta = this.period;
+			this.isDeleting = true;
+			} else if (this.isDeleting && this.txt === '') {
+			this.isDeleting = false;
+			this.loopNum++;
+			delta = 500;
+			}
+	
+			setTimeout(function() {
+			that.tick();
+			}, delta);
+		};
+	
+		window.onload = function() {
+			var elements = document.getElementsByClassName('typewrite');
+			for (var i=0; i<elements.length; i++) {
+				var toRotate = elements[i].getAttribute('data-type');
+				var period = elements[i].getAttribute('data-period');
+				if (toRotate) {
+				  new TxtType(elements[i], JSON.parse(toRotate), period);
+				}
+			}
+			// INJECT CSS
+			var css = document.createElement("style");
+			css.type = "text/css";
+			css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+			document.body.appendChild(css);
+		};
   </script>
 
   </body>
