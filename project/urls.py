@@ -33,7 +33,7 @@ urlpatterns = [
     path('home/',views.home, name='home'),
     path('host_interview_form/',views.host_interview_form, name='host_interview_form'),
     path('feedback_form/',views.feedback_form,name="feedback_form"),
-    #path('create_account_form/',views.create_account_form,name="create_account_form"),
+    path('book/',views.book,name="book"),
     path('logout/',views.logout,name="logout"),
 ]
 

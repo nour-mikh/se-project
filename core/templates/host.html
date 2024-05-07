@@ -17,7 +17,7 @@
     </div>       
     <div class="px-24 w-2/3 flex flex-col justify-center">
         <p class="text-center">  Create an interview slot here. This will show on your profile and users' feed. </p>
-        <form class="w-full flex flex-col justify-center space-y-4 md:space-y-6 method="post" action="{% url 'feedback_form' %}">
+        <form class="w-full flex flex-col justify-center space-y-4 md:space-y-6" method="POST" action="{% url 'host' %}">
             {% csrf_token %}
             <label for="date" class="block text-sm font-medium color-primary mb-2">Date</label>
             <input type="date" placeholder="Date" name="date" id="date" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">

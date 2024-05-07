@@ -21,8 +21,9 @@ class InterviewCategory(models.Model):
 
 class Interview(models.Model):
     interviewer = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
-    date_time = models.DateTimeField()
-    category = models.ForeignKey(InterviewCategory, null=True, on_delete=models.SET_NULL)
+    interview_date = models.DateField(null=True)
+    interview_time = models.TimeField(null=True)
+    category = models.CharField(max_length=100, null=True, blank=True)
     duration = models.DurationField(null=True, blank=True)
     price = models.FloatField(null=True, blank=True)
 
@@ -37,8 +38,9 @@ class Payment(models.Model):
 
 class Booking(models.Model):
     interview = models.ForeignKey(Interview, on_delete=models.SET_NULL, blank=True, null=True)
-    interviewer = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
-    payment =  models.ForeignKey(Payment, on_delete=models.SET_NULL, blank=True, null=True)
+    interviewer = models.ForeignKey(User, related_name='interviewer_bookings', on_delete=models.SET_NULL, blank=True, null=True)
+    interviewee = models.ForeignKey(User, related_name='interviewee_bookings', on_delete=models.SET_NULL, blank=True, null=True)
+    payment = models.ForeignKey(Payment, on_delete=models.SET_NULL, blank=True, null=True)
 
 
 class Feedback(models.Model):

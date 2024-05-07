@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .models import UserProfile
 from django.contrib import messages
+from .models import Interview, Booking
 
 def main(request):
     if request.method == 'POST':
@@ -76,22 +77,46 @@ def statistics(request):
     return render(request, 'statistics.html')
 
 def host(request):
+    if request.method == 'POST':
+        date = request.POST.get('date')
+        time = request.POST.get('time')
+        category = request.POST.get('category')
+        price = request.POST.get('price')
+
+        # Create a new Interview object with the submitted data
+        interview = Interview.objects.create(
+            interviewer=request.user,
+            interview_date=date,
+            interview_time=time,
+            category=category,
+            price=price
+        )
+        print('Interview created successfully!')
+        return render(request, 'home.html')
+    print("No interview getting created")
     return render(request,'host.html')
+
+def book(request):
+    if request.method == 'POST':
+        interview_id = request.POST.get('interview_id')
+        # Retrieve the interview object
+        interview = Interview.objects.get(pk=interview_id)
+        
+        # Create the Booking object
+        booking = Booking.objects.create(
+            interview=interview,
+            interviewer=interview.interviewer,
+            interviewee=request.user,
+        )
+        print('Booking created successfully!')
+    return render(request, 'booked.html')
 
 def feedback(request):
     return render(request,'feedback.html')
 
 def home(request):
-    availabilities = [] 
-    for i in range(4):
-        availability = {
-            'category': f'test_{i}',
-            'date': f'test_{i}',
-            'time': f'test_{i}',
-            'price': f'test_{i}'
-        }
-        availabilities.append(availability)
-    return render(request, 'home.html', {'availabilities': availabilities})
+    interviews = Interview.objects.all()
+    return render(request, 'home.html', {'interviews': interviews})
 
 #view function for submitting the host interview inputs 
 def host_interview_form(request):
@@ -104,17 +129,10 @@ def host_interview_form(request):
     return render(request,'home.html')
 
 def feedback_form(request):
-    if request.method == 'POST':
-        booking_ID = request.POST.get("booking_id")
-        com_skills = request.POST.get("com_skills")
-        professionalism = request.POST.get("professionalism")
-        adaptability = request.POST.get("adaptability")
-        preparation = request.POST.get("preparation")
-        competency = request.POST.get("competency")
-        time_mgt = request.POST.get("time_mgt")
-        effectiveness = request.POST.get("effectiveness")
+#TODO: Implement the feedback form
     return render(request,'home.html')
 
 
 def logout(request):
+    logout(request)
     return(request, 'home.html')
