@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.db.models import Q
 from .models import UserProfile
 from django.contrib import messages
 from .models import Interview, Booking
@@ -16,21 +17,12 @@ def main(request):
         if user is not None:
             print("login successfull")
             login(request, user)
-            return render(request, 'home.html')  
+            return redirect('home')  
         else:
             print("failed to login: ", request)
             messages.error(request, 'Invalid username or password')
     
-    availabilities = []  # Define the list before the loop
-    for i in range(4):
-        availability = {
-            'category': f'test_{i}',
-            'date': f'test_{i}',
-            'time': f'test_{i}',
-            'price': f'test_{i}'
-        }
-        availabilities.append(availability)
-    return render(request, 'index.html', {'availabilities': availabilities})
+    return render(request, 'index.html')
 
 def create(request):
     print("alo alo 1")
@@ -68,7 +60,9 @@ def create(request):
     return render(request, 'create-account.html')
 
 def profile(request):
-    return render(request, 'my-profile.html')
+    user = request.user
+    user_bookings = Booking.objects.filter(Q(interviewer=user) | Q(interviewee=user))
+    return render(request, 'my-profile.html', {'user': user, 'user_bookings': user_bookings})
 
 def bookings(request):
     return render(request, 'bookings.html')
@@ -92,7 +86,7 @@ def host(request):
             price=price
         )
         print('Interview created successfully!')
-        return render(request, 'home.html')
+        return redirect('home.html')
     print("No interview getting created")
     return render(request,'host.html')
 
