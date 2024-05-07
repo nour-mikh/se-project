@@ -132,3 +132,12 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+
+EMAIL_HOST = 'cloud121.osinode.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'newsletter@ositcom.net'
+DEFAULT_FROM_EMAIL = 'newsletter@ositcom.net'
+EMAIL_HOST_PASSWORD = 'ibiyes4700'
+EMAIL_USE_TLS = True
+
+
