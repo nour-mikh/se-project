@@ -45,4 +45,12 @@ class Booking(models.Model):
 
 class Feedback(models.Model):
     booking = models.ForeignKey(Booking, on_delete=models.CASCADE)
+    communication_skills = models.FloatField(null=True)
+    professionalism = models.FloatField(null=True)
+    adaptability =  models.FloatField(null=True)
+    preparation = models.FloatField(null=True)
+    competency = models.FloatField(null=True)
+    time_management = models.FloatField(null=True)
+    overall_effectiveness = models.FloatField(null=True)
     
+     

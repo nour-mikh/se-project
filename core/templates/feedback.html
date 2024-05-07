@@ -17,15 +17,21 @@
     </div>       
     <div class="px-24 w-2/3 flex flex-col justify-center">
         <p class="text-center"> Use this form to submit your feedback about an interview that you have held. Your interviewee will receive an email with the info you have entered. </p>
-        <form class="w-full flex flex-col justify-center space-y-4 md:space-y-6 method="post" action="{% url 'feedback_form' %}">
+        <form class="w-full flex flex-col justify-center space-y-4 md:space-y-6" method="post" action="{% url 'feedback_form' %}">
             {% csrf_token %}
             <div class="flex flex-row justify-around gap-4">
                 <div class="w-1/2">
-                    <label for="booking_id" class="block text-sm font-medium color-primary mb-2">Booking ID</label>
-                    <input type="text" placeholder="Booking ID" name="booking_id" id="booking_id" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-2" required="">
+                    <label for="booking_id" class="block text-sm font-medium color-primary mb-2">Booking</label>
+                    <select name="booking_id" id="booking_id" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-2" required>
+                        <option selected disabled>Select Booking</option>
+                        {% for booking in bookings %}
+                        <option name="{{booking.id}}">{{booking.id}}</option>
+                        {% endfor %}
+                    </select>
+
         
-                    <label for="com_skills" class="block text-sm font-medium color-primary mb-2">Communication Skills</label>
-                    <input type="number" placeholder="Communication Skills" name="com_skills" id="com_skills" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-2" required="">
+                    <label for="communication_skills" class="block text-sm font-medium color-primary mb-2">Communication Skills</label>
+                    <input type="number" placeholder="Communication Skills" name="communication_skills" id="communication_skills" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-2" required="">
         
                     <label for="professionalism" class="block text-sm font-medium color-primary mb-2">Professionalism</label>
                     <input type="number" placeholder="Professionalism" name="professionalism" id="professionalism" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-2" required="">
@@ -41,11 +47,11 @@
                     <label for="competency" class="block text-sm font-medium color-primary mb-2">Competency</label>
                     <input type="number" placeholder="Competency" name="competency" id="competency" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-2" required="">
     
-                    <label for="time_mgt" class="block text-sm font-medium color-primary mb-2">Time Management</label>
-                    <input type="number" placeholder="Time Management" name="time_mgt" id="time_mgt" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-2" required="">
+                    <label for="time_management" class="block text-sm font-medium color-primary mb-2">Time Management</label>
+                    <input type="number" placeholder="Time Management" name="time_management" id="time_management" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-2" required="">
     
-                    <label for="effectiveness" class="block text-sm font-medium color-primary mb-2">Overall Effectiveness</label>
-                    <input type="text" placeholder="Overall Effectiveness" name="effectiveness" id="effectiveness" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-2" required="">
+                    <label for="overall_effectiveness" class="block text-sm font-medium color-primary mb-2">Overall Effectiveness</label>
+                    <input type="text" placeholder="Overall Effectiveness" name="overall_effectiveness" id="overall_effectiveness" class="bg-gray-50 border border-gray-300 color-primary sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-2" required="">
                 </div>
             </div>
 

@@ -1,10 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
 from .models import UserProfile
 from django.contrib import messages
-from .models import Interview, Booking
+from .models import Interview, Booking, Feedback
+from django.core.mail import send_mail
+from django.conf import settings
 
 def main(request):
     if request.method == 'POST':
@@ -25,7 +27,6 @@ def main(request):
     return render(request, 'index.html')
 
 def create(request):
-    print("alo alo 1")
     if request.method == 'POST':
         print("alo alo")
         # Get data from the form
@@ -33,7 +34,7 @@ def create(request):
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         email = request.POST.get('email')
-        password = request.POST.get('password1')  # Assuming both passwords are the same
+        password = request.POST.get('password1') 
         gender = request.POST.get('gender')
         mobile_number = request.POST.get('mobile_number')
         date_of_birth = request.POST.get('date_of_birth')
@@ -51,13 +52,21 @@ def create(request):
             mobile_number=mobile_number,
             gender=gender,
             date_of_birth=date_of_birth,
-            # If you want to include image, uncomment the line below
-            # image=image
         )
 
-        print('User and UserProfile created successfully!')
-        return render(request, 'home.html')
+        # Authenticate user
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            print('User authenticated and logged in successfully!')
+            return redirect('home')  
+        else:
+            print('Failed to authenticate user!')
+            # Handle authentication failure 
+            return render(request, 'login.html')
+
     return render(request, 'create-account.html')
+
 
 def profile(request):
     user = request.user
@@ -110,8 +119,16 @@ def book(request):
         print('Booking created successfully!')
     return render(request, 'booked.html')
 
+
+
 def feedback(request):
-    return render(request,'feedback.html')
+    bookings = Booking.objects.all().order_by('-id')
+
+
+    context = {
+        'bookings': bookings,
+    }
+    return render(request,'feedback.html', context)
 
 def home(request):
     interviews = Interview.objects.all()
@@ -128,7 +145,45 @@ def host_interview_form(request):
     return render(request,'home.html')
 
 def feedback_form(request):
-#TODO: Implement the feedback form
+    if request.method == 'POST':
+        booking_id = request.POST.get("booking_id")
+        booking = get_object_or_404(Booking, id=booking_id)
+        communication_skills = request.POST.get("communication_skills")
+        professionalism = request.POST.get("professionalism")
+        adaptability = request.POST.get("adaptability")
+        preparation = request.POST.get("preparation")
+        competency = request.POST.get("competency")
+        time_management = request.POST.get("time_management")
+        feedback = Feedback.objects.create(
+            booking = booking,
+            communication_skills = communication_skills,
+            professionalism = professionalism,
+            adaptability = adaptability,
+            preparation = preparation,
+            competency = competency,
+            time_management = time_management,
+        )
+
+        interviewee_email = booking.interviewee.email
+
+        subject = f"Feedback for interview {booking.interview} is ready"
+        message = f"Hello {booking.interviewee.username}!\n\n"
+        message += f"Your feedback for interview {booking.interview} is ready. "
+        message += "Find below the provided info by your interviewer:\n"
+        message += f"Communication skills: {communication_skills}/5\n"
+        message += f"Professionalism: {professionalism}/5\n"
+        message += f"Adaptability: {adaptability}/5\n"
+        message += f"Preparation: {preparation}/5\n"
+        message += f"Competency: {competency}/5\n"
+        message += f"Time management: {time_management}/5\n"
+        message += "Overall Effectiveness: TEXT HERE\n\n"
+        message += "If you are happy about your results, congrats! Otherwise, you can still book other interviews on the platform.\n\n"
+        message += "Note that interview_me is not responsible for the content provided in this feedback.\n\n"
+        message += "Good luck!"
+
+        from_email = settings.EMAIL_HOST_USER
+        send_mail(subject, message, from_email, [interviewee_email])
+
     return render(request,'home.html')
 
 
