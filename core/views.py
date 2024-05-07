@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from django.db.models import Q
+from django.db.models import Q, Avg
 from .models import UserProfile
 from django.contrib import messages
 from .models import Interview, Booking, Feedback
@@ -67,11 +67,36 @@ def create(request):
 
     return render(request, 'create-account.html')
 
-
 def profile(request):
     user = request.user
     user_bookings = Booking.objects.filter(Q(interviewer=user) | Q(interviewee=user))
-    return render(request, 'my-profile.html', {'user': user, 'user_bookings': user_bookings})
+
+    # Extracting booking IDs from user_bookings
+    booking_ids = user_bookings.values_list('id', flat=True)
+
+    # Retrieving related feedbacks
+    related_feedbacks = Feedback.objects.filter(booking__id__in=booking_ids)
+
+    # Calculating average grades for each feedback criterion
+    average_communication_skills = related_feedbacks.aggregate(Avg('communication_skills'))['communication_skills__avg']
+    average_professionalism = related_feedbacks.aggregate(Avg('professionalism'))['professionalism__avg']
+    average_adaptability = related_feedbacks.aggregate(Avg('adaptability'))['adaptability__avg']
+    average_preparation = related_feedbacks.aggregate(Avg('preparation'))['preparation__avg']
+    average_competency = related_feedbacks.aggregate(Avg('competency'))['competency__avg']
+    average_time_management = related_feedbacks.aggregate(Avg('time_management'))['time_management__avg']
+
+    return render(request, 'my-profile.html', {
+        'user': user,
+        'user_bookings': user_bookings,
+        'related_feedbacks': related_feedbacks,
+        'average_communication_skills': average_communication_skills,
+        'average_professionalism': average_professionalism,
+        'average_adaptability': average_adaptability,
+        'average_preparation': average_preparation,
+        'average_competency': average_competency,
+        'average_time_management': average_time_management,
+    })
+
 
 def bookings(request):
     return render(request, 'bookings.html')
@@ -154,6 +179,8 @@ def feedback_form(request):
         preparation = request.POST.get("preparation")
         competency = request.POST.get("competency")
         time_management = request.POST.get("time_management")
+        overall_effectiveness = request.POST.get("overall_effectiveness")
+
         feedback = Feedback.objects.create(
             booking = booking,
             communication_skills = communication_skills,
@@ -162,13 +189,14 @@ def feedback_form(request):
             preparation = preparation,
             competency = competency,
             time_management = time_management,
+            overall_effectiveness = overall_effectiveness
         )
 
         interviewee_email = booking.interviewee.email
 
-        subject = f"Feedback for interview {booking.interview} is ready"
+        subject = f"Feedback for interview {booking.interview.id} is ready"
         message = f"Hello {booking.interviewee.username}!\n\n"
-        message += f"Your feedback for interview {booking.interview} is ready. "
+        message += f"Your feedback for interview {booking.interview.id} is ready. "
         message += "Find below the provided info by your interviewer:\n"
         message += f"Communication skills: {communication_skills}/5\n"
         message += f"Professionalism: {professionalism}/5\n"
@@ -176,7 +204,7 @@ def feedback_form(request):
         message += f"Preparation: {preparation}/5\n"
         message += f"Competency: {competency}/5\n"
         message += f"Time management: {time_management}/5\n"
-        message += "Overall Effectiveness: TEXT HERE\n\n"
+        message += f"Overall Effectiveness: {overall_effectiveness}\n\n"
         message += "If you are happy about your results, congrats! Otherwise, you can still book other interviews on the platform.\n\n"
         message += "Note that interview_me is not responsible for the content provided in this feedback.\n\n"
         message += "Good luck!"
@@ -184,7 +212,7 @@ def feedback_form(request):
         from_email = settings.EMAIL_HOST_USER
         send_mail(subject, message, from_email, [interviewee_email])
 
-    return render(request,'home.html')
+    return render(request,'feedback_submitted.html')
 
 
 def logout(request):

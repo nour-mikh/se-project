@@ -51,6 +51,6 @@ class Feedback(models.Model):
     preparation = models.FloatField(null=True)
     competency = models.FloatField(null=True)
     time_management = models.FloatField(null=True)
-    overall_effectiveness = models.FloatField(null=True)
+    overall_effectiveness = models.TextField(null=True)
     
      
