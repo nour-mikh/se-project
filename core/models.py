@@ -18,7 +18,6 @@ class UserProfile(models.Model):
 class InterviewCategory(models.Model):
     name = models.CharField(max_length=50)
 
-
 class Interview(models.Model):
     interviewer = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
     interview_date = models.DateField(null=True)
@@ -26,6 +25,7 @@ class Interview(models.Model):
     category = models.CharField(max_length=100, null=True, blank=True)
     duration = models.DurationField(null=True, blank=True)
     price = models.FloatField(null=True, blank=True)
+    booked = models.BooleanField(default=False)  
 
 
 class Payment(models.Model):

@@ -96,6 +96,11 @@ def book(request):
         # Retrieve the interview object
         interview = Interview.objects.get(pk=interview_id)
         
+        # Check if the interview is not already booked
+        if not interview.booked:
+            # Set the interview as booked
+            interview.booked = True
+            interview.save()
         # Create the Booking object
         booking = Booking.objects.create(
             interview=interview,

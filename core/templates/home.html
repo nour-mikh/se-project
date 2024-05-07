@@ -20,7 +20,10 @@
 
         <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-8 w-full px-5">
             {% for interview in interviews %}
-            <div class="border p-4 rounded-lg mb-4 bg-gray-100 shadow-lg relative">
+            <div class="border p-4 rounded-lg mb-4 {% if interview.booked %}bg-gray-300{% else %}bg-gray-100{% endif %} shadow-lg relative">
+                {% if interview.booked %}
+                <p class="mb-2 text-center text-red-500 font-semibold">This slot has been already booked</p>
+                {% endif %}
                 <ul class="max-w-full">
                     <li class="mb-2"><span class="font-bold">Interviewer:</span> {{ interview.interviewer }}</li>
                     <li class="mb-2"><span class="font-bold">Category:</span> {{ interview.category }}</li>
@@ -28,16 +31,19 @@
                     <li class="mb-2"><span class="font-bold">Time:</span> {{ interview.interview_time }}</li>
                     <li class="mb-2"><span class="font-bold">Price:</span> {{ interview.price }}</li>
                 </ul>
-                <form method="post" action="{%url 'book'%}">
+                {% if not interview.booked %}
+                <form method="post" action="{% url 'book' %}">
                     {% csrf_token %}
                     <input type="hidden" name="interview_id" value="{{ interview.id }}">
                     <button type="submit" class="bg-customSec rounded-lg px-4 py-2 text-customMain font-bold text-sm hover:bg-customMain hover:text-customSec absolute bottom-4 right-4">Book</button>
                 </form>
+                {% else %}
+                <button class="bg-gray-400 rounded-lg px-4 py-2 text-gray-800 font-bold text-sm absolute bottom-4 right-4" disabled>Booked</button>
+                {% endif %}
             </div>
             {% endfor %}
-
+        </div>
         
-      </div>
     </div>
 
     <div>
