@@ -120,7 +120,7 @@ def host(request):
             price=price
         )
         print('Interview created successfully!')
-        return redirect('home.html')
+        return render(request, 'created.html')
     print("No interview getting created")
     return render(request,'host.html')
 
